@@ -1,3 +1,5 @@
+package sudoku.problemDomain;
+
 import java.util.Objects;
 
 public class Coordinates {

@@ -6,6 +6,8 @@ import java.io.IOException;
 import sudoku.constants.GameState;
 import sudoku.constants.Messages;
 import sudoku.problemDomain.IStorage;
+import sudoku.problemDomain.SudokuGame;
+import sudoku.computationLogic.GameLogic;
 
 public class ControlLogic implements IUserInterfaceContract.EventListner {
 

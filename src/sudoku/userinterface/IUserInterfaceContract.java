@@ -1,3 +1,7 @@
+package sudoku.userinterface;
+
+import sudoku.problemDomain.SudokuGame;
+
 public interface IUserInterfaceContract {
     interface EventListner {
         void onSudokuInput(int x, int y, int input);

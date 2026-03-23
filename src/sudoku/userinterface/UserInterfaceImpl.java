@@ -1,3 +1,5 @@
+package sudoku.userinterface;
+
 import java.beans.EventHandler;
 import java.lang.foreign.GroupLayout;
 import java.util.HashMap;
@@ -17,10 +19,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import sudoku.constants.GameState;
 import sudoku.problemDomain.Coordinates;
+import sudoku.problemDomain.SudokuGame;
 
 public class UserInterfaceImpl implements IUserInterfaceContract.View,
         EventHandler<KeyEvent> {
-    
+
     private final Stage stage;
     private final Group root;
 
@@ -238,5 +241,11 @@ public class UserInterfaceImpl implements IUserInterfaceContract.View,
             ((SudokuTextField) source).getY(),
             value
         );
+    }
+
+    @Override
+    public void updateBoard(SudokuGame game) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateBoard'");
     }
 }

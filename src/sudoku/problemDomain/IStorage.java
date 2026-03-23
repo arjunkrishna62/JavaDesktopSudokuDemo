@@ -1,3 +1,5 @@
+package sudoku.problemDomain;
+
 import java.io.IOException;
 
 public interface IStorage {

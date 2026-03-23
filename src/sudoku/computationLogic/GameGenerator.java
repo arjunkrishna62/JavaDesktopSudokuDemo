@@ -7,6 +7,7 @@ import java.util.stream.Gatherer.Integrator.Greedy;
 
 import sudoku.problemDomain.Coordinates;
 import sudoku.problemDomain.SudokuGame;
+import sudoku.computationLogic.GameLogic;
 
 import static sudoku.problemDomain.SudokuGame.GRID_BOUNDARY;
 
@@ -80,7 +81,7 @@ public class GameGenerator {
                 if (newGrid[xCoordinate][yCoordinate] == 0) {
                     newGrid[xCoordinate][yCoordinate] = value;
 
-                    if (GameLogic.sudokuIsValid(newGrid)) {
+                    if (GameLogic.sudokuIsInvalid(newGrid)) {
                         newGrid[xCoordinate][yCoordinate] = 0;
                         interrupt++;
                     } else {
