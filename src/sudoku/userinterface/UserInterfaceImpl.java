@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -21,8 +22,7 @@ import sudoku.constants.GameState;
 import sudoku.problemDomain.Coordinates;
 import sudoku.problemDomain.SudokuGame;
 
-public class UserInterfaceImpl implements IUserInterfaceContract.View,
-        EventHandler<KeyEvent> {
+public class UserInterfaceImpl implements IUserInterfaceContract.View, EventHandler<KeyEvent> {
 
     private final Stage stage;
     private final Group root;
@@ -79,8 +79,8 @@ public class UserInterfaceImpl implements IUserInterfaceContract.View,
             Rectangle horizontalLine = getLine(
                 xAndY + 64 * index,
                 BOARD_PADDING,
-                BOARD_X_AND_Y,
-                thickness
+                thickness,
+                BOARD_X_AND_Y
             );
 
             root.getChildren().addAll(verticalLine, horizontalLine);
@@ -94,10 +94,11 @@ public class UserInterfaceImpl implements IUserInterfaceContract.View,
 
         line.setX();
         line.setY();
+
         line.setHeight();
         line.setWidth();
 
-        line.setFill(color.Black);
+        line.setFill(Color.Black);
         return line;
     }
 
