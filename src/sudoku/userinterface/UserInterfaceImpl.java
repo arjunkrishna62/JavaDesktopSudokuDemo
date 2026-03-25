@@ -1,7 +1,7 @@
 package sudoku.userinterface;
 
-import java.beans.EventHandler;
-import java.lang.foreign.GroupLayout;
+// import java.beans.EventHandler;
+// import java.lang.foreign.GroupLayout;/
 import java.util.HashMap;
 
 import javafx.geometry.Pos;
@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.paint.Color;
@@ -69,14 +70,14 @@ public class UserInterfaceImpl implements IUserInterfaceContract.View, EventHand
                 thickness = 2;
             }
 
-            Rectangle verticalLine = getLine(
+            Rectangle verticalLine = getLIne(
                 xAndY + 64 * index,
                 BOARD_PADDING,
                 BOARD_X_AND_Y,
                 thickness
             );
 
-            Rectangle horizontalLine = getLine(
+            Rectangle horizontalLine = getLIne(
                 xAndY + 64 * index,
                 BOARD_PADDING,
                 thickness,
@@ -92,13 +93,13 @@ public class UserInterfaceImpl implements IUserInterfaceContract.View, EventHand
     private Rectangle getLIne(double x, double y, double height, double width){
         Rectangle line = new Rectangle();
 
-        line.setX();
-        line.setY();
+        line.setX(x);
+        line.setY(y);
 
-        line.setHeight();
-        line.setWidth();
+        line.setHeight(height);
+        line.setWidth(width);
 
-        line.setFill(Color.Black);
+        line.setFill(Color.BLACK);
         return line;
     }
 
@@ -160,7 +161,7 @@ public class UserInterfaceImpl implements IUserInterfaceContract.View, EventHand
     
     private void drawBackground(Group root) {
         Scene scene = new Scene(root, WINDOW_X, WINDOW_Y);
-        scene.setFill(BOARD_BACKGROUND_COLOR);
+        scene.setFill(WINDOW_BACKGROUND_COLOR);
         stage.setScene(scene);
     }
 
@@ -182,12 +183,12 @@ public class UserInterfaceImpl implements IUserInterfaceContract.View, EventHand
 
     @Override
     public void updateBoard(SudokuGame game){
-        for (int xIndex; xIndex < 9; xIndex++){
-            for (int yIndex; yIndex < 9; yIndex++){
+        for (int xIndex = 0; xIndex < 9; xIndex++){
+            for (int yIndex = 0; yIndex < 9; yIndex++){
                 TextField tile = textFieldCoordinates.get(new Coordinates(xIndex, yIndex));
 
                 String value = Integer.toString(
-                        game.getCopyOfGridState()[xIndex[yIndex]]
+                        game.getCopyOfGridState()[xIndex][yIndex]
                 );
 
                 if (value.equals("0")) value = "";
@@ -244,9 +245,9 @@ public class UserInterfaceImpl implements IUserInterfaceContract.View, EventHand
         );
     }
 
-    @Override
-    public void updateBoard(SudokuGame game) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateBoard'");
-    }
+    // @Override
+    // public void updateBoard(SudokuGame game) {
+    //     // TODO Auto-generated method stub
+    //     throw new UnsupportedOperationException("Unimplemented method 'updateBoard'");
+    // }
 }
