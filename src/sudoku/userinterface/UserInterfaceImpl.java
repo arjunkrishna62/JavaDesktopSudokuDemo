@@ -59,50 +59,6 @@ public class UserInterfaceImpl implements IUserInterfaceContract.View, EventHand
         stage.show();
     }
 
-    private void drawGridLines(Group root) {
-        int xAndY = 114;
-        int index = 0;
-        while (index < 8) {
-            int thickness;
-            if (index == 2 || index == 5) {
-                thickness = 3;
-            } else {
-                thickness = 2;
-            }
-
-            Rectangle verticalLine = getLIne(
-                xAndY + 64 * index,
-                BOARD_PADDING,
-                BOARD_X_AND_Y,
-                thickness
-            );
-
-            Rectangle horizontalLine = getLIne(
-                xAndY + 64 * index,
-                BOARD_PADDING,
-                thickness,
-                BOARD_X_AND_Y
-            );
-
-            root.getChildren().addAll(verticalLine, horizontalLine);
-
-            index++;
-        }
-    }
-
-    private Rectangle getLIne(double x, double y, double height, double width){
-        Rectangle line = new Rectangle();
-
-        line.setX(x);
-        line.setY(y);
-
-        line.setHeight(height);
-        line.setWidth(width);
-
-        line.setFill(Color.BLACK);
-        return line;
-    }
-
     private void drawTextFields(Group root) {
         final int xOrigin = 50;
         final int yOrigin = 50;
@@ -141,14 +97,66 @@ public class UserInterfaceImpl implements IUserInterfaceContract.View, EventHand
         tile.setBackground(Background.EMPTY);
     }
 
+    private void drawGridLines(Group root) {
+        int xAndY = 114;
+        int index = 0;
+        while (index < 8) {
+            int thickness;
+            if (index == 2 || index == 5) {
+                thickness = 3;
+            } else {
+                thickness = 2;
+            }
+
+            Rectangle verticalLine = getLIne(
+                xAndY + 64 * index,
+                BOARD_PADDING,
+                BOARD_X_AND_Y,
+                thickness
+            );
+
+            Rectangle horizontalLine = getLIne(
+                BOARD_PADDING,
+                xAndY + 64 * index,
+                thickness,
+                BOARD_X_AND_Y
+            );
+
+            root.getChildren().addAll(verticalLine, horizontalLine);
+
+            index++;
+        }
+    }
+
+    private Rectangle getLIne(double x, double y, double height, double width){
+        Rectangle line = new Rectangle();
+
+        line.setX(x);
+        line.setY(y);
+
+        line.setHeight(height);
+        line.setWidth(width);
+
+        line.setFill(Color.BLACK);
+        return line;
+    }
+
+    private void drawBackground(Group root) {
+        Scene scene = new Scene(root, WINDOW_X, WINDOW_Y);
+        scene.setFill(WINDOW_BACKGROUND_COLOR);
+        stage.setScene(scene);
+    }
+
     private void drawSudokuBoard(Group root) {
-        Rectangle boardRectangle = new Rectangle();
-        boardRectangle.setX(BOARD_X_AND_Y);
-        boardRectangle.setY(BOARD_X_AND_Y);
+        Rectangle boardBackground = new Rectangle();
+        boardBackground.setX(BOARD_PADDING);
+        boardBackground.setY(BOARD_PADDING);
+        boardBackground.setWidth(BOARD_X_AND_Y);
+        boardBackground.setHeight(BOARD_X_AND_Y);
 
-        boardRectangle.setFill(BOARD_BACKGROUND_COLOR);
+        boardBackground.setFill(BOARD_BACKGROUND_COLOR);
 
-        root.getChildren().addAll(boardRectangle);
+        root.getChildren().add(boardBackground);
     }
 
     private void drawTitle(Group root) {
@@ -156,13 +164,7 @@ public class UserInterfaceImpl implements IUserInterfaceContract.View, EventHand
         title.setFill(Color.WHITE);
         Font titleFont = new Font(43);
         title.setFont(titleFont);
-        root.getChildren().addAll(title);
-    }
-    
-    private void drawBackground(Group root) {
-        Scene scene = new Scene(root, WINDOW_X, WINDOW_Y);
-        scene.setFill(WINDOW_BACKGROUND_COLOR);
-        stage.setScene(scene);
+        root.getChildren().add(title);
     }
 
     @Override
@@ -200,7 +202,7 @@ public class UserInterfaceImpl implements IUserInterfaceContract.View, EventHand
                         tile.setStyle("-fx-opactiy: 1;");
                         tile.setDisable(true);
                     } else {
-                        tile.setStyle("-fxo-opacity: 0.8;k");
+                        tile.setStyle("-fxo-opacity: 0.8;");
                         tile.setDisable(true);
                     }
                 }
@@ -225,7 +227,18 @@ public class UserInterfaceImpl implements IUserInterfaceContract.View, EventHand
     @Override
     public void handle(KeyEvent event) {
         if (event.getEventType() == KeyEvent.KEY_PRESSED) {
-            if (event.getText().matches("[0-9]")) {
+            if (event.getText().equals("0")
+                || event.getText().equals("1")
+                || event.getText().equals("2")
+                || event.getText().equals("3")
+                || event.getText().equals("4")
+                || event.getText().equals("5")
+                || event.getText().equals("6")
+                || event.getText().equals("7")
+                || event.getText().equals("8")
+                || event.getText().equals("9")
+                
+            ) {
                 int value = Integer.parseInt(event.getText());
                 handleInput(value, event.getSource());
             } else if (event.getCode() == KeyCode.BACK_SPACE){
@@ -244,10 +257,4 @@ public class UserInterfaceImpl implements IUserInterfaceContract.View, EventHand
             value
         );
     }
-
-    // @Override
-    // public void updateBoard(SudokuGame game) {
-    //     // TODO Auto-generated method stub
-    //     throw new UnsupportedOperationException("Unimplemented method 'updateBoard'");
-    // }
 }
