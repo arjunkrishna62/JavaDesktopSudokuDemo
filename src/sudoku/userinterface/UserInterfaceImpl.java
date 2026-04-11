@@ -200,9 +200,9 @@ public class UserInterfaceImpl implements IUserInterfaceContract.View, EventHand
                 if (game.getGameState() == GameState.NEW){
                     if (value.equals("")){
                         tile.setStyle("-fx-opactiy: 1;");
-                        tile.setDisable(true);
+                        tile.setDisable(false);
                     } else {
-                        tile.setStyle("-fxo-opacity: 0.8;");
+                        tile.setStyle("-fx-opacity: 0.8;");
                         tile.setDisable(true);
                     }
                 }
